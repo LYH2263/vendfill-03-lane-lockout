@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { api } from '../api'
 const data = ref<any>(null)
+const STATUS_LABEL: Record<string, string> = { need_fill: '待补', full: '满仓', overbooked: '超占', blocked: '封锁' }
 async function run() { data.value = await api('/refills/run?location_id=1', { method: 'POST' }) }
 onMounted(run)
 </script>
@@ -17,7 +18,7 @@ onMounted(run)
       </div>
       <div class="vf-receipt-line" v-for="l in data.lines" :key="l.lane_id">
         <span>{{ l.slot_no }} {{ l.sku_name }}
-          <small>({{ l.status === 'need_fill' ? '待补' : l.status === 'full' ? '满仓' : '超占' }})</small>
+          <small>({{ STATUS_LABEL[l.status] ?? l.status }})</small>
         </span>
         <span>{{ l.fill_qty }} / 缺{{ l.gap }}</span>
       </div>

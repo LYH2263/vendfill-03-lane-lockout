@@ -12,5 +12,6 @@ onMounted(async () => { s.value = await api('/refills/summary?location_id=1') })
     <div><div class="muted">待补货道</div><div class="stat">{{ s.need_fill_count }}</div></div>
     <div><div class="muted">满仓货道</div><div class="stat">{{ s.full_count }}</div></div>
     <div><div class="muted">超占货道</div><div class="stat">{{ s.overbooked_count }}</div></div>
+    <div><div class="muted">封锁货道</div><div class="stat">{{ s.blocked_count ?? 0 }}</div></div>
   </div>
 </template>

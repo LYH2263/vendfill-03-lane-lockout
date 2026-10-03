@@ -116,6 +116,24 @@ h1 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 
 .vf-slot-fill.vf-need { background: var(--vf-amber); }
 .vf-slot-meta { font-size: 0.62rem; color: var(--vf-dim); margin-top: 0.25rem; }
 
+/* Lane maintenance block */
+.vf-slot.vf-blocked {
+  border-color: var(--vf-red);
+  background: linear-gradient(180deg, #2a1e24, #16121a);
+}
+.vf-slot.vf-blocked .vf-slot-fill { background: var(--vf-dim); }
+.vf-lock-tag { color: var(--vf-red); font-size: 0.6rem; margin-left: 0.25rem; }
+.vf-lock-btn {
+  margin-top: 0.3rem; padding: 0.14rem 0.2rem;
+  font-size: 0.6rem; font-family: inherit;
+  background: var(--vf-face); color: var(--vf-dim);
+  border: 1px solid #3a4454; border-radius: 3px; cursor: pointer;
+}
+.vf-lock-btn:hover { color: var(--vf-text); border-color: var(--vf-amber); }
+.vf-lock-btn.on { color: var(--vf-red); border-color: var(--vf-red); }
+.vf-lock-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.vf-error { color: var(--vf-red); font-size: 0.78rem; margin: 0 0 0.75rem; }
+
 /* Receipt paper panel */
 .vf-receipt {
   background: var(--vf-paper);
