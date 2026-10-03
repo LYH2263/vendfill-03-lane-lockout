@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
 from app.api.router import api_router
 from app.config import settings
@@ -12,6 +13,12 @@ from app.services.seed import seed_if_empty
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     Base.metadata.create_all(bind=engine)
+    if engine.dialect.name == "postgresql":
+        # create_all does not alter existing tables; keep old volumes working.
+        with engine.begin() as conn:
+            conn.execute(text(
+                "ALTER TABLE lanes ADD COLUMN IF NOT EXISTS blocked BOOLEAN NOT NULL DEFAULT FALSE"
+            ))
     if settings.seed_on_empty:
         db = SessionLocal()
         try:

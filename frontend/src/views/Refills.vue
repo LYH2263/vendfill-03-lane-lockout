@@ -17,7 +17,7 @@ onMounted(run)
       </div>
       <div class="vf-receipt-line" v-for="l in data.lines" :key="l.lane_id">
         <span>{{ l.slot_no }} {{ l.sku_name }}
-          <small>({{ l.status === 'need_fill' ? '待补' : l.status === 'full' ? '满仓' : '超占' }})</small>
+          <small>({{ l.reason || (l.status === 'need_fill' ? '待补' : l.status === 'full' ? '满仓' : l.status === 'overbooked' ? '超占' : '货道封锁') }})</small>
         </span>
         <span>{{ l.fill_qty }} / 缺{{ l.gap }}</span>
       </div>
